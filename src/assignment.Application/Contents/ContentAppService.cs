@@ -7,9 +7,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Authorization;
+using assignment.Authorization;
 
 namespace assignment.Contents
 {
+    [AbpAuthorize(PermissionNames.Pages_Contents)]
     public class ContentAppService: ApplicationService, IContentAppService
     {
         private readonly IContentManager _contentManager;
