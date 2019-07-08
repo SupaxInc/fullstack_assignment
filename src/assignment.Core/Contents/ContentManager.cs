@@ -31,7 +31,7 @@ namespace assignment.Contents
 
         public IEnumerable<Content> GetAll()
         {
-            return _repository.GetAllList().ToList();
+            return _repository.GetAll();
         }
 
         public async Task<Content> GetCMSContent(int id)
@@ -43,12 +43,14 @@ namespace assignment.Contents
         {
             // Needs to be fixed
             var content = await _repository.FirstOrDefaultAsync(x => x.Id == entity.Id);
+            
             if (content == null)
             {
                 return await _repository.InsertOrUpdateAsync(entity);
             } else
             {
-                
+                content.PageName = entity.PageName;
+                content.PageContent = entity.PageContent;
                 return await _repository.InsertOrUpdateAsync(content);
             }
         }

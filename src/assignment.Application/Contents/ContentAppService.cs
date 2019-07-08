@@ -39,7 +39,6 @@ namespace assignment.Contents
 
         public async Task InsertOrUpdateCMSContent(InsertOrUpdateInput input)
         {
-            // Needs to be fixed
             Content output = Mapper.Map<InsertOrUpdateInput, Content>(input);
             await _contentManager.InsertOrUpdateCMSContent(output);
         }
