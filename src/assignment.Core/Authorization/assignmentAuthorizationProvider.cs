@@ -10,6 +10,9 @@ namespace assignment.Authorization
         {
             context.CreatePermission(PermissionNames.Pages_Users, L("Users"));
             context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
+            // Content Page will only be viewed by the host (blank tenant name)
+            // Localization needs to me initialized in main xml file
+            context.CreatePermission(PermissionNames.Pages_Contents, L("Contents"), multiTenancySides: MultiTenancySides.Host);
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
         }
 
