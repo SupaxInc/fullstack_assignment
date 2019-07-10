@@ -1,13 +1,17 @@
-import { Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, Injector, ViewEncapsulation, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { MenuItem } from '@shared/layout/menu-item';
+import { GetContentOutput, ContentServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ContentsService } from '@app/contents/contents.service';
 
 @Component({
     templateUrl: './sidebar-nav.component.html',
     selector: 'sidebar-nav',
     encapsulation: ViewEncapsulation.None
 })
-export class SideBarNavComponent extends AppComponentBase {
+export class SideBarNavComponent extends AppComponentBase implements OnInit{
+
+    contents: GetContentOutput[] = [];
 
     menuItems: MenuItem[] = [
         new MenuItem(this.l('HomePage'), '', 'home', '/app/home'),
@@ -37,9 +41,17 @@ export class SideBarNavComponent extends AppComponentBase {
     ];
 
     constructor(
-        injector: Injector
+        injector: Injector,
+        private service: ContentsService
     ) {
         super(injector);
+        this.contents = this.service.contents;
+    }
+
+    ngOnInit () {
+        
+        this.menuItems.push(new MenuItem('test', '', '', ''));
+        this.addMenuItems();
     }
 
     showMenuItem(menuItem): boolean {
@@ -48,5 +60,11 @@ export class SideBarNavComponent extends AppComponentBase {
         }
 
         return true;
+    }
+
+    addMenuItems() {
+        for (let content of this.contents) {
+            this.menuItems.push(new MenuItem(content.pageName, '', '', '/app/contents/:contentId'));
+        }
     }
 }

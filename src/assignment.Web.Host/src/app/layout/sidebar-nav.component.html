@@ -56,5 +56,10 @@
                 </ul>
             </li>
         </ng-template>
+        <a *ngFor="let content of contents" [routerLink]="['/app/contents', content.id]">
+            <span>
+                {{content.pageName}}
+            </span>
+        </a>
     </ul>
 </div>

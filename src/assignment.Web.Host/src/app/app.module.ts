@@ -38,6 +38,8 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 import { ContentsComponent } from './contents/contents.component';
+import { ContentsDetailComponent } from './contents/contents-detail/contents-detail.component';
+import { ContentsService } from './contents/contents.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { ContentsComponent } from './contents/contents.component';
     EditUserDialogComponent,
     ChangePasswordComponent,
     ResetPasswordDialogComponent,
-    ContentsComponent
+    // contents
+    ContentsComponent,
+    ContentsDetailComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +83,7 @@ import { ContentsComponent } from './contents/contents.component';
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [ContentsService],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
