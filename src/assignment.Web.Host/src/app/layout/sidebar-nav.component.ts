@@ -42,15 +42,16 @@ export class SideBarNavComponent extends AppComponentBase implements OnInit{
 
     constructor(
         injector: Injector,
-        private service: ContentsService
+        private _contentService: ContentServiceProxy
     ) {
         super(injector);
-        this.contents = this.service.contents;
+        this._contentService.getAll()
+            .subscribe((result: GetContentOutput[]) => {
+                this.contents = result;
+        });
     }
 
     ngOnInit () {
-        
-        this.menuItems.push(new MenuItem('test', '', '', ''));
         this.addMenuItems();
     }
 
